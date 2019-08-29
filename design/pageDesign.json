@@ -1,0 +1,75 @@
+{
+    "name": "悦智管理站点",
+    "summary": [],
+    "referenceApi": [
+        
+    ],
+    "pages": [
+        {
+            "name": "登陆页",
+            "url": "/login",
+            "allow_roles": [ "*" ],
+            "remark": [ ],
+            "functions": [
+                {
+                    "name": "登陆功能", "api_url": "",
+                    "remark": [
+                        "服务端渲染。",
+                        "输入用户名和密码之后，检查是否登陆成功。"
+                    ]
+                }
+            ]
+        },
+        {
+            "name" : "用户管理" ,
+            "url": "/user/list",
+            "allow_roles": [ "admin" ],
+            "remark": [ 
+                "管理系统里的用户"
+            ],
+            "functions":[
+                
+            ]
+        },
+        {
+            "name" : "编辑用户" ,
+            "url": "/user/edit",
+            "allow_roles": [ "admin" ],
+            "remark": [ 
+                "编辑 用户信息， 修改用户的密码",
+                ""
+            ],
+            "functions":[
+                
+            ]
+        },
+        {
+            "name" : "服务器列表页" ,
+            "url": "/server/list",
+            "allow_roles": [ "?" ],
+            "remark": [ 
+                "显示当前用户具有权限的服务器信息",
+                "根据 各种信息， 对服务器进行搜索"
+            ],
+            "functions":[
+                
+            ]
+        },
+        {
+            "name" : "编辑服务器信息" ,
+            "url": "/server/edit",
+            "allow_roles": [ "?" ],
+            "remark": [ 
+                "录入一个服务器信息",
+                "服务器 信息",
+                "服务器登陆信息",
+                "服务器部署的软件的信息",
+                "服务器授权信息",
+                "每一个操作， 都需检查当前用户是否对此服务器由权限"
+            ],
+            "functions":[
+                
+            ]
+        }
+    ]
+}

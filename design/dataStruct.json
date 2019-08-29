@@ -1,0 +1,65 @@
+{
+    "dbName": "data.db",
+    "dbUser": "",
+    "dbPwd": "",
+    "schema": "",
+    "tables": [
+        {
+            "tableName": "account", "tableDesc": "账户", 
+            "fields": [
+                { "name": "account_id",      "type": "text",     "dblength": "0", "dftValue": "''",       "summary": "",        "remark": "" , "isPrimary": true } ,
+                { "name": "login_name",      "type": "string",   "dblength": "50", "dftValue": "''",      "summary": "",        "remark": "", "isPrimary": false },
+                { "name": "pwd",             "type": "string",   "dblength": "200", "dftValue": "''",     "summary": "密码",     "remark": "", "isPrimary": false } ,
+                { "name": "create_time",     "type": "dateTime", "dblength": "0", "dftValue": "now()",    "summary": "创建时间",  "remark": "", "isPrimary": false } ,
+                { "name": "login_count",     "type": "int",      "dblength": "0", "dftValue": "0",        "summary": "登陆次数",   "remark": "", "isPrimary": false } ,
+                { "name": "last_login_time", "type": "dateTime", "dblength": "0", "dftValue": "now()",    "summary": "最后登陆时间。", "remark": "", "isPrimary": false } ,
+                { "name": "state",           "type": "text",     "dblength": "20", "dftValue": "'enable'", "summary": "状态",      "remark": "enable / disable", "isPrimary": false } ,
+                { "name": "role_code",       "type": "string",   "dblength": "20", "dftValue": "''",       "summary": "角色编码",    "remark": "''", "isPrimary": false } 
+            ]
+        },
+        {
+            "tableName": "server", "tableDesc": "服务器信息", 
+            "fields": [
+                { "name": "server_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": true } ,
+                { "name": "owner", "type": "text", "dblength": "100", "dftValue": "''", "summary": "拥有者", "remark": "谁出钱，谁就是拥有者", "isPrimary": false } ,
+                { "name": "os_info", "type": "text", "dblength": "1000", "dftValue": "''", "summary": "操作系统信息", "remark": "", "isPrimary": false } ,
+                { "name": "ip", "type": "text", "dblength": "64", "dftValue": "''", "summary": "ip地址", "remark": "" , "isPrimary": false } ,
+                { "name": "name", "type": "text", "dblength": "100", "dftValue": "''", "summary": "名称", "remark": "默认等于ip,可修改", "isPrimary": false } ,
+                { "name": "cpu", "type": "int", "dblength": "0", "dftValue": "1", "summary": "cpu核心数", "remark": "", "isPrimary": false } ,
+                { "name": "memory", "type": "int", "dblength": "0", "dftValue": "512", "summary": "内存大小", "remark": "单位:M ", "isPrimary": false } ,
+                { "name": "disk", "type": "text", "dblength": "500", "dftValue": "''", "summary": "磁盘大小", "remark": "json 数组，{ 'type': 'hd/ssd' , 'size': '50G' }", "isPrimary": false } ,
+                { "name": "network", "type": "text", "dblength": "500", "dftValue": "''", "summary": "带宽情况", "remark": "字符串即可", "isPrimary": false } ,
+                { "name": "location", "type": "text", "dblength": "100", "dftValue": "''", "summary": "所处机房", "remark": "", "isPrimary": false } ,
+                { "name": "tags", "type": "text", "dblength": "1000", "dftValue": "''", "summary": "标签", "remark": "", "isPrimary": false } ,
+                { "name": "remark", "type": "text", "dblength": "1000", "dftValue": "''", "summary": "备注", "remark": "", "isPrimary": false } ,
+                { "name": "encrypt_info", "type": "text", "dblength": "3000", "dftValue": "''", "summary": "加密的登陆信息", "remark": "{ 'ip': '' , 'port':22 , 'user': 'root' , 'pwd':'' , 'cert':'' , 'cert_pwd':'' }", "isPrimary": false } ,
+                { "name": "create_time", "type": "dateTime", "dblength": "0", "dftValue": "now()", "summary": "创建的时间", "remark": "", "isPrimary": false } ,
+                { "name": "create_account_id", "type": "text", "dblength": "50", "dftValue": "''", "summary": "创建者账户id", "remark": "", "isPrimary": false } ,
+                { "name": "state", "type": "text", "dblength": "20", "dftValue": "normal", "summary": "状态", "remark": "disable,normal", "isPrimary": false } ,
+                { "name": "odr_idx", "type": "int", "dblength": "0", "dftValue": "100", "summary": "排序值", "remark": "越大越前", "isPrimary": false } 
+            ]
+        },
+        {
+            "tableName": "server_apps", "tableDesc": "服务器的部署信息", "group": "", 
+            "fields": [
+                { "name": "id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": true } ,
+                { "name": "server_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": false } ,
+                { "name": "app_name", "type": "text", "dblength": "200", "dftValue": "''", "summary": "app 的名字", "remark": "", "isPrimary": false } ,
+                { "name": "version", "type": "text", "dblength": "20", "dftValue": "''", "summary": "版本", "remark": "", "isPrimary": false } ,
+                { "name": "deploy_dir", "type": "text", "dblength": "500", "dftValue": "''", "summary": "文件目录", "remark": "", "isPrimary": false } ,
+                { "name": "remark", "type": "text", "dblength": "3000", "dftValue": "''", "summary": "app的备注。例如改了哪些配置", "remark": "", "isPrimary": false } 
+            ]
+        },
+        {
+            "tableName": "server_auth", "tableDesc": "服务器的授权信息", "remark": "管理员可以授权给其他用户，自己录入服务器时由系统授权。",
+            "fields": [
+                { "name": "id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": true } ,
+                { "name": "server_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": false } ,
+                { "name": "account_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "", "isPrimary": false } ,
+                { "name": "auth_by", "type": "text", "dblength": "32", "dftValue": "''", "summary": "由谁授权。", "remark": "用户自己录入的服务器，此值为system", "isPrimary": false } ,
+                { "name": "auth_reason", "type": "text", "dblength": "500", "dftValue": "''", "summary": "授权原因", "remark": "", "isPrimary": false } ,
+                { "name": "create_time", "type": "dateTime", "dblength": "0", "dftValue": "now()", "summary": "授权的时间", "remark": "", "isPrimary": false } 
+            ]
+        }
+    ]
+}

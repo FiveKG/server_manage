@@ -1,0 +1,22 @@
+{
+    "name" : "library-service",
+    "apis" : [
+        {
+            "name" : "健康检查接口" ,
+            "summary": "" ,
+            "remark": [
+                
+            ],
+            "isFunctionPoint" : false,
+            "url" : "/api/health",
+            "type" : "GET",
+            "requireRole" : [ "*" ],
+            "req": {
+                
+            },
+            "res": {
+                
+            }
+        }
+    ]
+}

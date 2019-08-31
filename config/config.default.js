@@ -18,6 +18,15 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  //配置数据库
+  config.sequelize = {
+    dialect: 'postgres', // support: mysql, mariadb, postgres, mssql
+    database: 'yue_manage',
+    host: '192.168.1.102',
+    port: 5432,
+    username: 'postgres',
+    password: 'pass@2018',
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

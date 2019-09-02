@@ -60,7 +60,21 @@ module.exports = app =>{
             type:INTEGER,
             defaultValue:"100"
         },
+    },{
+        createdAt: false,//创建时间戳
+        updateAt: false,//更新时间戳
+        freezeTableName: true,//禁止表名后边加s
+        classMethods:{
+            associate(){
+                app.model.Server.hasMany(app.model.ServerAuth,{foreignKey:'server_id',targetKey: 'id'});
+            }
+        }
     });
-     return Server;
-}
+    
+    
+    // Server.associate = function(){
+    //     app.model.Server.hasMany(app.model.ServerAuth);
+    // };
 
+     return Server;
+};

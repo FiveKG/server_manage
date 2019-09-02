@@ -21,7 +21,19 @@ module.exports = app =>{
         remark:{
             type:TEXT
         },
+    },{
+        createdAt: false,//创建时间戳
+        updateAt: false,//更新时间戳
+        freezeTableName: true,//禁止表名后边加s
+        classMethods:{
+            associate(){
+                app.model.ServerApps.belongsTo(app.model.Server);
+            }
+        }
     })
-
+    // //添加1：1关系模型
+    // ServerApps.associate = function(){
+    //     app.model.ServerApps.belongsTo(app.model.Server);
+    // }
     return ServerApps;
 }

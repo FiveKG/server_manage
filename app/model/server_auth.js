@@ -22,7 +22,15 @@ module.exports = app =>{
             type:DATE,
             defaultValue: app.Sequelize.fn('now')
         },
+    },{
+        createdAt: false,//创建时间戳
+        updateAt: false,//更新时间戳
+        freezeTableName: true,//禁止表名后边加s
+        classMethods:{
+            associate(){
+                app.model.ServerAuth.belongsTo(app.model.Server,{foreignKey: 'server_id',targetKey: 'id'});
+            }
+        }
     })
-
     return ServerAuth;
 }

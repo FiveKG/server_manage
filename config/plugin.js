@@ -10,10 +10,10 @@ module.exports = {
     enable: true,
     package: 'egg-sequelize',
   },
-  nunjucks: {
+  ejs : {
     enable: true,
-    package: 'egg-view-nunjucks',
-  }
+    package: 'egg-view-ejs',
+  },
 };
 
 // exports.sequelize={

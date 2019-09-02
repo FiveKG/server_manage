@@ -27,6 +27,13 @@ module.exports = appInfo => {
     username: 'postgres',
     password: 'pass@2018',
   };
+
+  //模板渲染
+  config.view = {
+    mapping: {
+      '.html': 'ejs',
+    },
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

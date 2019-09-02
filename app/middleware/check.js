@@ -27,17 +27,22 @@ function deny(ctx, msg){
 function check(config,app) {    
     
     return async function (ctx, next) {
-        ctx.logger.info(`enter check middleware. url: ${ctx.url}`);
+        ctx.logger.debug(`enter check middleware. url: ${ctx.url}`);
         if(ctx.url.indexOf("login") == -1){
             
-            let loginCookie =  ctx.cookies.get('login-cookie', { signed: true, encrypt: true });
-            if(!loginCookie){
+            let base64Str =  ctx.cookies.get('login', { signed: true, encrypt: true });
+            ctx.logger.debug(`login base64Str:${base64Str}`);
+            // const loginCookie = JSON.parse(cookieStr);
+            if(!base64Str){
                 ctx.logger.info(`未获取到 loginCookie. 转向`);
                 deny(ctx, "请提供token");
                 return;
             }
             else{
-                ctx.logger.info(` 离开 check middleware`);
+                const cookieStr = Buffer.from(base64Str, 'base64').toString();
+                ctx.logger.debug(`cookieStr:${cookieStr}`);
+                ctx.logger.debug(` 离开 check middleware`);
+                ctx.user = JSON.parse(cookieStr);
                 await next();
             }
         }

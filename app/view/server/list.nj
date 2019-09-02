@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <title>服务器列表页</title>
+    </head>
+    <body>
+        <div> name:{{name}} 
+              avatar: {{avatar}}
+        </div>
+    </body>
+</html>

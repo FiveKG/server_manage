@@ -12,7 +12,7 @@
             "remark": [ ],
             "functions": [
                 {
-                    "name": "", "api_url": "",
+                    "name": "登陆功能", "api_url": "",
                     "remark": [
                         "服务端渲染。",
                         "输入用户名和密码之后，检查是否登陆成功。"

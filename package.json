@@ -7,14 +7,15 @@
     "declarations": true
   },
   "dependencies": {
+    "date-fns": "^2.0.1",
     "egg": "^2.15.1",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^5.2.0",
     "egg-sqlite3": "^1.0.1",
     "egg-view-ejs": "^2.0.0",
-    "egg-view-nunjucks": "^2.2.0",
     "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3"
+    "pg-hstore": "^2.3.3",
+    "egg-view-nunjucks": "^2.2.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -30,9 +31,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-yuezhi-manage-web",
+    "start": "egg-scripts start --daemon --port=7002 --title=egg-server-yuezhi-manage-web",
     "stop": "egg-scripts stop --title=egg-server-yuezhi-manage-web",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --port=7002",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

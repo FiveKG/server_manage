@@ -1,7 +1,14 @@
-// module.exports = app => {
-//     if (app.config.env === 'local' || app.config.env === 'unittest') {
-//       app.beforeStart(async () => {
-//         await app.model.sync({force: true});
-//       });
-//     }
-//   };
+//@ts-check
+
+/**
+ * 
+ * @param {Egg.Application} app 
+ */
+function eggApp(app){
+    //@ts-ignore
+    app.cache = {};
+    app.ready( async () =>{
+        app.logger.info(` eggjs app ready`);
+    });
+}
+module.exports = eggApp;

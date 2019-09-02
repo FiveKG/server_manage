@@ -8,13 +8,14 @@
             "tableName": "account", "tableDesc": "账户", 
             "fields": [
                 { "name": "account_id",      "type": "text",     "dblength": "20", "dftValue": "''",       "summary": "",        "remark": "" , "isPrimary": true } ,
+                { "name": "account_id",      "type": "text",     "dblength": "0", "dftValue": "''",       "summary": "",        "remark": "" , "isPrimary": true } ,
                 { "name": "login_name",      "type": "string",   "dblength": "50", "dftValue": "''",      "summary": "",        "remark": "", "isPrimary": false },
                 { "name": "pwd",             "type": "string",   "dblength": "200", "dftValue": "''",     "summary": "密码",     "remark": "", "isPrimary": false } ,
                 { "name": "create_time",     "type": "dateTime", "dblength": "0", "dftValue": "now()",    "summary": "创建时间",  "remark": "", "isPrimary": false } ,
                 { "name": "login_count",     "type": "int",      "dblength": "0", "dftValue": "0",        "summary": "登陆次数",   "remark": "", "isPrimary": false } ,
                 { "name": "last_login_time", "type": "dateTime", "dblength": "0", "dftValue": "now()",    "summary": "最后登陆时间。", "remark": "", "isPrimary": false } ,
                 { "name": "state",           "type": "text",     "dblength": "20", "dftValue": "'enable'", "summary": "状态",      "remark": "enable / disable", "isPrimary": false } ,
-                { "name": "role_code",       "type": "string",   "dblength": "20", "dftValue": "''",       "summary": "手机号码",    "remark": "''", "isPrimary": false } 
+                { "name": "role_code",       "type": "string",   "dblength": "20", "dftValue": "''",       "summary": "角色编码",    "remark": "''", "isPrimary": false } 
             ]
         },
         {

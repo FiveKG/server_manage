@@ -14,6 +14,13 @@ module.exports = {
     enable: true,
     package: 'egg-view-ejs',
   },
+  // static: {
+  //   enable: true,
+  // }
+  nunjucks:{
+    enable: true,
+    package: 'egg-view-nunjucks',
+  }
 };
 
 // exports.sequelize={

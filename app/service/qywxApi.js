@@ -178,6 +178,7 @@ class QywxApiService extends Service {
   }
 
   /**
+   * 
    * 从 微信接口获取 AccessToken
    * @param {string} tokenType
    * @returns {Promise<WxAccessTokenResp>}

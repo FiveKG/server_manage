@@ -1,6 +1,6 @@
-'use strict';
 
 /**
+ * 
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
@@ -11,4 +11,6 @@ module.exports = app => {
   router.get("/login_success", controller.systemPage.login_success);
 
   router.get(`/server/list` , controller.server.list);
+
+  router.post('/api/qw-hook' , controller.hookApi.gitHook);
 };

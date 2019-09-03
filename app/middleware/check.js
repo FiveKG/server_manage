@@ -19,6 +19,8 @@ function deny(ctx, msg){
     }
 }
 
+const exceptUrl = [""];
+
 /**
  * 
  * @param {Egg.EggAppConfig} config 

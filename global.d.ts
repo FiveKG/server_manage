@@ -1,5 +1,5 @@
 /** 企业微信 获取 Access Token 接口的响应结构 */
-interface WxAccessTokenResp{
+interface WxAccessTokenResp {
     /** 出错返回码，为0表示成功，非0表示调用失败 */
     errcode: number;
 
@@ -29,7 +29,7 @@ interface WxUserInfoResp{
 }
 
 /** 企业微信获取用户详细信息的响应 */
-interface WxUserResp{
+interface WxUserResp {
 
     /** 返回码 */
     errcode	:string;
@@ -95,4 +95,114 @@ interface WxUserResp{
     address	 : string;
     
 
+}
+
+/** token 和 key 的 映射 */
+interface tokenKeyMap {
+    /** 项目名字 */
+    project : string ;
+
+    /** key */
+    qw_key : string;
+
+}
+
+/** gitlab 推送的消息结构 */
+interface gitLabTagMessage{
+    object_kind        : string ;
+    event_name         : string ;
+    before             : string ;
+    after              : string ;
+    ref                : string ;
+    checkout_sha       : string ;
+    message            : string ;
+    user_id            : number ;
+    user_name          : string ;
+    user_email         : string ;
+    project_id         : number ;
+    project            : gitLabProject ;
+    commits            : Array<repoCommit> ;
+    total_commits_count: number ;
+    push_options       : Array<any> ;
+    repository         : gitLabRepo ;
+}
+
+/** gitlab 的项目结构 */
+interface gitLabProject{
+    id                 : number ;
+    name               : string ;
+    description        : string ;
+    web_url            : string ;
+    avatar_url         : string ;
+    git_ssh_url        : string ;
+    git_http_url       : string ;
+    namespace          : string ;
+    visibility_level   : number ;
+    path_with_namespace: string ;
+    default_branch     : string ;
+    ci_config_path     : string ;
+    homepage           : string ;
+    url                : string ;
+    ssh_url            : string ;
+    http_url           : string ;
+}
+
+/** 项目的 签入的结构 */
+interface repoCommit{
+    id       : string ;
+    message  : string ;
+    timestamp: Date ;
+    url      : string ;
+    author   : authorObj ;
+    added    : Array<string> ;
+    modified : Array<string>;
+    removed  : Array<string>;
+}
+
+interface authorObj {
+    name : string ;
+    email: string ;
+}
+
+interface gitLabRepo {
+    name            : string ;
+    url             : string ;
+    description     : string ;
+    homepage        : string ;
+    git_http_url    : string ;
+    git_ssh_url     : string ;
+    visibility_level: number ;
+
+}
+
+interface qwTextMessage{
+    /** 消息类型，此时固定为text */
+    msgtype : string;
+
+    /** 文本内容，最长不超过2048个字节，必须是utf8编码 */
+    text : textMessage;    
+}
+
+interface textMessage {
+    /** 文本内容，最长不超过2048个字节，必须是utf8编码 */
+    content : string ;
+
+    /** userid的列表，提醒群中的指定成员(@某个成员)，@all表示提醒所有人，如果开发者获取不到userid，可以使用mentioned_mobile_list */
+    mentioned_list? : Array<string>;
+
+    /** 手机号列表，提醒手机号对应的群成员(@某个成员)，@all表示提醒所有人 */
+    mentioned_mobile_list? : Array<string>;
+}
+
+interface qwMarkdownMessage{
+    /** 消息类型，此时固定为markdown */
+    msgtype : string ;
+
+    /** markdown内容，最长不超过4096个字节，必须是utf8编码 */
+    markdown : markdownMessage ;
+}
+
+interface markdownMessage {
+    /** markdown内容，最长不超过4096个字节，必须是utf8编码 */
+    content : string ;
 }

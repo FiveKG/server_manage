@@ -13,11 +13,11 @@ class SystemPageController extends Controller {
     const webPageAuthUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${CORPID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
 
     const obj = {
-      "auth_url": webPageAuthUrl,
-      "appid": CORPID ,
-      "agentid": agentId,
+      "auth_url"    : webPageAuthUrl,
+      "appid"       : CORPID,
+      "agentid"     : agentId,
       "redirect_uri": REDIRECT_URI,
-      "state": `=&_csrf=${this.ctx.csrf}` 
+      "state"       : `=&_csrf=${this.ctx.csrf}`
     };
 
     await this.ctx.render("systemPage/login" , obj);

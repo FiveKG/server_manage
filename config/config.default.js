@@ -34,12 +34,12 @@ module.exports = appInfo => {
 
   //配置数据库
   config.sequelize = {
-    dialect: 'postgres', // support: mysql, mariadb, postgres, mssql
-    database: 'yue_manage',
-    host: '192.168.1.102',
-    port: 5432,
-    username: 'postgres',
-    password: 'pass@2018',
+    dialect : 'postgres',
+    database:  process.env.DB_NAME , //'yue_manage',
+    host    :  process.env.DB_HOST , //'127.0.0.1',
+    port    :  process.env.DB_PORT , //5432,
+    username:  process.env.DB_USER , //'dbuser',
+    password:  process.env.DB_PWD ,  //'pass_2019',
   };
 
   //模板渲染

@@ -3,6 +3,11 @@
 const Controller = require('egg').Controller;
 
 class HookApiController extends Controller {
+
+  /**
+   *接受 gitlab 的 推送消息，并转发到 对应的 企业微信聊天机器人的接口
+   * @memberof HookApiController
+   */
   async gitHook() {
     const { ctx , logger  } = this;
     const request = ctx.request;
@@ -30,6 +35,8 @@ class HookApiController extends Controller {
       const result = await this.service.qywxBotApi.pushGitLabMsg(tokenProject , request.body);
       logger.info(`push over.`, result);
      
+
+      //根据 打包服务启动之后， 注册到本系统里的状态， 调度一个合适的打包服务器 进行打包操作。
       // // 判断是否是 Tag Push Hook . 如果是 ， 那么 意味着 要在服务器上进行打包 docker 镜像。
       // if(gitlab_event === "Tag Push Hook") {
       //   logger.info(`start Tag Push Hook.`);

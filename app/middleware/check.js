@@ -19,19 +19,21 @@ function deny(ctx, msg){
     }
 }
 
-const exceptUrl = [""];
+/** 需要 排除的 URL  */
+const exceptUrl = [ "/login" , "/login_success" , "/api/qw-hook" ];
 
 /**
  * 
  * @param {Egg.EggAppConfig} config 
  * @param {Egg.Application} app 
+ * @returns {(ctx: import('egg').Context, next: any) => Promise<any>}
  */
-function check(config,app) {    
+function check(config,app) {
     
     return async function (ctx, next) {
         ctx.logger.debug(`enter check middleware. url: ${ctx.url}`);
-        if(ctx.url.indexOf("login") == -1){
-            
+        //if(ctx.url.indexOf("login") == -1){
+        if(exceptUrl.includes(ctx.url)){    
             let base64Str =  ctx.cookies.get('login', { signed: true, encrypt: true });
             ctx.logger.debug(`login base64Str:${base64Str}`);
             // const loginCookie = JSON.parse(cookieStr);

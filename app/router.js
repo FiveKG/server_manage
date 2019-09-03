@@ -13,4 +13,8 @@ module.exports = app => {
   router.get(`/server/list` , controller.server.list);
 
   router.post('/api/qw-hook' , controller.hookApi.gitHook);
+
+  router.post(`/api/build-svr/register`, controller.buildServer.register);
+
+  router.post(`/api/build-svr/notify`, controller.buildServer.notify);
 };

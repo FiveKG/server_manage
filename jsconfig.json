@@ -1,5 +1,18 @@
 {
   "include": [
     "**/*"
-  ]
+  ],
+  "exclude" : [
+    "node_modules/",
+    "app/pubilc/",
+    "app/view/",
+    "public/",
+    "app/mocks/",
+    "coverage/",
+    "logs/"
+  ],
+  "compilerOptions":{
+    "target": "es6"
+}
+
 }

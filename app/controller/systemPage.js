@@ -34,7 +34,7 @@ class SystemPageController extends Controller {
     //todo: 从数据库里检查 是否有这个用户的信息， 如果没有， 则需要调用 微信的通讯录接口， 获取用户的详情。
 
     const userDetail = await this.service.qywxApi.getUserDetail(userInfo.UserId);
-    this.ctx.body = userDetail;
+    // this.ctx.body = userDetail;
     this.logger.debug(`userDetail:`,userDetail);
     //todo: 如果数据库里没有这个用户， 同步到数据库内。
 

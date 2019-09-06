@@ -20,7 +20,7 @@ function deny(ctx, msg){
 }
 
 /** 需要 排除的 URL  */
-const exceptUrl = [ "/login" , "/login_success" , "/api/qw-hook" ];
+const exceptUrl = [ "/login" , "/login_success" , "/api" ];
 
 /**
  * 
@@ -32,8 +32,12 @@ function check(config,app) {
     
     return async function (ctx, next) {
         ctx.logger.debug(`enter check middleware. url: ${ctx.url}`);
-        //if(ctx.url.indexOf("login") == -1){
-        if(exceptUrl.includes(ctx.url)){    
+        
+        if(ctx.url.indexOf("login") > -1 || ctx.url.startsWith("/api/")){//if(exceptUrl.includes(ctx.url)){
+            ctx.logger.info(`login page , api ....`);
+            await next();
+        }
+        else{
             let base64Str =  ctx.cookies.get('login', { signed: true, encrypt: true });
             ctx.logger.debug(`login base64Str:${base64Str}`);
             // const loginCookie = JSON.parse(cookieStr);
@@ -49,10 +53,6 @@ function check(config,app) {
                 ctx.user = JSON.parse(cookieStr);
                 await next();
             }
-        }
-        else{
-            ctx.logger.info(`login page , api ....`);
-            await next();
         }
         
         

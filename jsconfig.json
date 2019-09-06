@@ -10,5 +10,8 @@
     "app/mocks/",
     "coverage/",
     "logs/"
-  ]
+  ],
+  "compilerOptions":{
+    "target": "es6"
+  }
 }

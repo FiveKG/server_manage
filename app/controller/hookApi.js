@@ -22,30 +22,36 @@ class HookApiController extends Controller {
         ctx.body = "request invalid. please provide X-Gitlab-Token . ";
         return ;
       }
-
+      const gitlabMsg = request.body;
       const tokenProject = this.config.tokenKeyMap[gitlab_token];
       logger.debug(`tokenProject:` , tokenProject);
       if(tokenProject == undefined){
-        ctx.status = 403;
-        ctx.body = `gitlab_token : ${gitlab_token} 不合法。未找到对应的企业微信机器人的配置. `;
-        return ;
+        logger.info(`gitlab_token : ${gitlab_token} 不合法。未找到对应的企业微信机器人的配置.`);
+        // ctx.status = 403;
+        // ctx.body = `gitlab_token : ${gitlab_token} 不合法。未找到对应的企业微信机器人的配置. `;
+        // return ;
       }
-
-      // const result = await this.service.qwHook.pushGitLabMsg(tokenProject , request.body);  
-      const result = await this.service.qywxBotApi.pushGitLabMsg(tokenProject , request.body);
-      logger.info(`push over.`, result);
+      else{
+        const result = await this.service.qywxBotApi.pushGitLabMsg(tokenProject , gitlabMsg);
+        logger.info(`push over.`, result);
+      }
      
+      //判断是否是 release 分支的 事件， 如果是， 那么 要调用 buildServer 进行打包的操作。
+      let ref   = gitlabMsg.ref   || "";
+      let after = gitlabMsg.after || "";
+      this.logger.info(`ref:[${ref}] , after:[${after}]`);
 
-      //根据 打包服务启动之后， 注册到本系统里的状态， 调度一个合适的打包服务器 进行打包操作。
-      // // 判断是否是 Tag Push Hook . 如果是 ， 那么 意味着 要在服务器上进行打包 docker 镜像。
-      // if(gitlab_event === "Tag Push Hook") {
-      //   logger.info(`start Tag Push Hook.`);
-      //   this.app.runInBackground( async () => {
-      //     const build_result = this.service.git.buildDockerImage(tokenProject , request.body);
-      //     logger.info(`Tag Push Hook over. build_result :${build_result}`);
-      //   })
-      // }
-
+      if( ref.indexOf('release/') > 0 && after != "0000000000000000000000000000000000000000" ){
+          //ref 不包含 release 或者 after == 0000000000000000000000000000000000000000 ， 代表不用打包镜像
+          //根据 打包服务启动之后， 注册到本系统里的状态， 调度一个合适的打包服务器 进行打包操作。
+          const imageBuildReq = {
+            "after_commit_id" : after ,
+            "project_name": gitlabMsg.project.name,
+            "repo_ssh_url": gitlabMsg.project.git_ssh_url,
+            "ref"         : gitlabMsg.ref
+          };
+          await  this.service.buildServer.dispatch_job(imageBuildReq);
+      }
       ctx.body = {"success":true};
 
     } catch (err) {

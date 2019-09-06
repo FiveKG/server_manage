@@ -6,4 +6,4 @@ export DB_NAME=yue_manage
 
 
 # npm start 
-npm run dev
+npm start

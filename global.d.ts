@@ -206,3 +206,45 @@ interface markdownMessage {
     /** markdown内容，最长不超过4096个字节，必须是utf8编码 */
     content : string ;
 }
+
+
+/** 打包服务注册请求 */
+interface BuildServerRegisterReq{
+    /** 打包服务的主机地址 */
+    host : string ;
+
+    /** 打包服务器 的 负载 数 */
+    load_rate: number;
+
+    /** 状态的 更新的时间 */
+    update_time : string;
+}
+
+/** 镜像打包请求的数据结构 */
+interface ImageBuildReq{
+    
+    /** gitlab message 里 after 属性的值  */
+    after_commit_id : string;
+
+    /** 项目的名称 */
+    project_name :string ;
+
+    /** 项目的 git 地址(ssh 地址) */
+    repo_ssh_url: string ;
+
+    /** 打包的分支信息 */
+    ref : string;
+}
+
+/** 任务分配的数据 */
+interface DispatchJob {
+
+    /** 任务缓存的时间 */
+    time : string;
+
+    /** 任务的 id */
+    id : string ; 
+
+    /** 任务的数据 */
+    data : ImageBuildReq;
+}

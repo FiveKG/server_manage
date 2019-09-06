@@ -22,6 +22,12 @@ module.exports = appInfo => {
     // allowDebugAtProd: true
   };
 
+  config.security = {
+    csrf: {
+      ignore : [ "/api/"  ]
+    }
+  };
+
   // add your middleware config here
   config.middleware = [ 'check' ];
 
@@ -51,7 +57,7 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
-    "site_url": "https%3A%2F%2Fgit-hook.isecsp.com",
+    "site_url": "https://git-hook.isecsp.com",
 
     /** 企业微信 悦智管理 app 的配置 */
     "qywx":{

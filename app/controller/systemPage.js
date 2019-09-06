@@ -1,6 +1,7 @@
 //@ts-check
 
 const Controller = require('egg').Controller;
+const querystring = require("querystring");
 
 class SystemPageController extends Controller {
   async login() {
@@ -9,7 +10,7 @@ class SystemPageController extends Controller {
     //构造 网页授权链接 ，以及 二维码 的连接 ， 显示到页面上。
     const CORPID = this.config.qywx.corp_id ;
     const agentId = this.config.qywx.agentId ;
-    const REDIRECT_URI =  `${this.config.site_url}/login_success`;
+    const REDIRECT_URI =  `${querystring.escape(this.config.site_url)}/login_success`;
     const webPageAuthUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${CORPID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
 
     const obj = {

@@ -48,9 +48,19 @@ class HookApiController extends Controller {
             "after_commit_id" : after ,
             "project_name": gitlabMsg.project.name,
             "repo_ssh_url": gitlabMsg.project.git_ssh_url,
-            "ref"         : gitlabMsg.ref
+            "ref"         : gitlabMsg.ref,
+            "type": "release"
           };
           await  this.service.buildServer.dispatch_job(imageBuildReq);
+      } else if (gitlab_event === 'Tag Push Hook' && ref.indexOf('master') > 0) {
+        const imageBuildReq = {
+          "after_commit_id" : after ,
+          "project_name": gitlabMsg.project.name,
+          "repo_ssh_url": gitlabMsg.project.git_ssh_url,
+          "ref"         : gitlabMsg.ref,
+          "type": "master"
+        };
+        await  this.service.buildServer.dispatch_job(imageBuildReq);
       }
       ctx.body = {"success":true};
 

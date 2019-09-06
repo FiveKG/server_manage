@@ -234,6 +234,8 @@ interface ImageBuildReq{
 
     /** 打包的分支信息 */
     ref : string;
+    /** 类型 */
+    type: string;
 }
 
 /** 任务分配的数据 */

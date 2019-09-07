@@ -1,0 +1,412 @@
+<%include ./share/x_panel_head.html%> 
+<form class="form-horizontal form-label-left" id = "server_form" method="POST">
+        <!-- <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">服务器ID</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" readonly="readonly" placeholder="自动生成">
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">拥有者 *</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="谁出钱，谁就是拥有者" name = "owner">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">操作系统信息 
+          </label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <textarea class="form-control" rows="3" placeholder="操作系统信息"  name = "os_info"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">ip地址 *</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="ip地址" name ="ip">
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">端口 *</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" name = "port" placeholder="默认22" value = "22"  >
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">服务器名称</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="默认ip地址" name="server_name" >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">cpu核心数</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="默认1" name = "cpu" value = "1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">内存大小</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="input-group">
+              <input type="text" class="form-control" name = "memory" placeholder="默认512" value = "512">
+              <div class="input-group-addon">M</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">硬盘</label>
+              <div class= "col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="disk" placeholder="默认50G" value = "50">
+                  <div class="input-group-addon">G</div>
+                </div>
+              </div>
+              <select class="selectpicker col-md-3 col-sm-3 col-xs-12" >
+                  <option value="hd">hd</option>
+                  <option value="ssd">ssd</option>
+              </select>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">带宽</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" class="form-control" name = "network" value = '' >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">所处机房</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" class="form-control" name="location" value = '' >
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">标签</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input id="tags_1" type="text" class="tags form-control" value="无标签" name= "tags">
+              <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">备注</span>
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <textarea class="form-control" rows="3" name="remark" value='' placeholder="备注信息"></textarea>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <button type='button' class='btn btn-primary btn-lg 'data-toggle='modal' data-target='#setPwd' >保存</button>
+            </div>
+        </div>
+
+        <!--设置密码模态框-->>
+        <div class="modal fade" id="setPwd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                <h4 class="modal-title">设置密码</h4>
+                </div>
+        
+                  <!-- 模态框主体 -->
+                  <div class="modal-body">
+                    <form id = 'pwd_form'>
+                      <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12">登录方式：</label>
+                          <select class="selectpicker col-md-8 col-sm-8 col-xs-12" name="select_pwd" id = "select_pwd" title="选择加密方式" >
+                              <option value="login_pwd" selected = 'selected'>密码登录</option>
+                              <option value="login_cert">上传证书</option>
+                          </select>
+                      </div>
+                      <div class="form-group"  id="input_pwd">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" id = "pwd_label">密码登录</label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                              <input type="password" class="form-control" name= "input_pwd">
+                          </div>
+                      </div>
+                      
+                      <div class="form-group" hidden id="upload_cert">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">上传证书</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                　<input type="file"  name="upload_cert" /> <br />
+                            </div>
+                      </div>
+                      <ul class="nav nav-list"><li class="divider"></li></ul>
+                      <div class="form-group"  id="encrypt_code">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" >加密密码：</label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                              <input type="password" class="form-control" name= "encrypt_code" placeholder="用于加密以上信息，切勿忘记" >
+                          </div>
+                      </div>
+                      <div class="form-group"  id="repassword">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12">确认密码：</label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                              <input type="password" class="form-control" name="repassword" >
+                          </div>
+                      </div>
+                      <div class="form-group" hidden  >
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+                          <div class="col-md-8 col-sm-8 col-xs-12" id="cert_content">
+                          </div>
+                      </div>
+
+                    </form>
+                  </div>
+        
+                  <!-- 模态框底部 -->
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" onclick="loading_data()"  value="确定">
+                    <button type="button" class="btn btn-secondary" id = 'sure'>测试</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                  </div>
+                </div>
+                </div>
+        </div>
+
+
+      </form>
+
+
+      <script defer="defer">
+
+            
+            /**
+             * 选择下拉菜单
+             */
+              $(function(){
+                $('#select_pwd').change(function(){
+                  $("#input_pwd").attr("style","display:block;");
+                  let current_value = $('#select_pwd').val()
+                  if(current_value == "login_pwd"){
+                    $("#pwd_label").text("登录密码：");
+                    $('#upload_cert').attr("style","display:none;");
+                  }
+                  else if(current_value == "login_cert"){
+                    $("#pwd_label").text("密钥密码：");
+                    $('#upload_cert').attr("style","display:block;");
+                  } 
+                })
+              });
+    
+              /**
+               * 设置登录密码信息规则
+               */
+              $('form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {/*验证：规则*/
+                    owner:{
+                      message:'ip填写有误',
+                      validators: {
+                        notEmpty: {
+                                message: 'ip不能为空'
+                            },
+                      }
+                    },
+                    ip:{
+                      message:'ip填写有误',
+                      validators: {
+                        notEmpty: {
+                                message: 'ip不能为空'
+                            },
+                        regexp:{
+                          regexp:/^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
+                          message:'输入正确的IPV4地址'
+                        }
+                      }
+                    },
+                    port: {
+                        message: '端口填写有误',
+                        validators: {
+                            notEmpty: {
+                                message: '端口不能为空'
+                            },
+                            between: {
+                                min: 1,
+                                max: 65535,
+                                message: '端口长度由1~65535'
+                            },
+                            threshold :  1 , //有1字符以上才发送ajax请求，
+                            regexp: {
+                                regexp: /^([1-9][0-9]*)$/,
+                                message: '端口由数字组成'
+                            }
+                        }
+                    },
+                    memory:{
+                      message: '内存填写有误',
+                      validators: {
+                        regexp: {
+                                regexp: /^([1-9][0-9]*)$/,
+                                message: '填写数字'
+                            }
+                        }
+                    },
+                    disk:{
+                      message: '硬盘填写有误',
+                      validators: {
+                        regexp: {
+                                regexp: /^([1-9][0-9]*)$/,
+                                message: '填写数字'
+                            }
+                        }
+                    },
+                    input_pwd: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                        }
+                    },
+                    repassword: {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空'
+                            },
+                            identical: {//相同
+                                field: 'encrypt_code',
+                                message: '两次密码不一致'
+                            },
+                        }
+                    },
+                    encrypt_code:{
+                      message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            identical: {//相同
+                                field: 'repassword', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                        }
+                    },
+                    upload_cert:{
+                        validators: {
+                          notEmpty: {
+                                message: '不能为空'
+                            },
+                          file:  {
+                              maxSize: 1024*1024, // 文件大小，单位为b，这里为1mb
+                              message: '文件不合法，必须小于1MB'
+                          },
+                      }
+                   },
+                }
+            });
+              
+            /**
+             * 点击保存，上传数据
+             */
+            function loading_data(){
+              var formData = new FormData($("#server_form")[0]);
+              let data =  formData.entries()
+              console.log(JSON.stringify(data))
+ 
+              for(let a of data){
+                console.log(a)
+              }
+            }
+
+            $("input[name='upload_cert']").change(function () {
+                  var fileList = this.files;
+                  var reader = new FileReader();
+                  reader.onload = function (e) {
+                  var output = document.getElementById("cert_content");
+                  output.textContent = e.target.result;
+                };
+                reader.readAsText(fileList[0]);   
+
+              });
+          /**
+           * 提交表单
+           */
+           $("#sure").click(function(){
+              $("#server_form").bootstrapValidator('validate');
+              if($("#server_form").data('bootstrapValidator').isValid()){
+                var csrftoken           = $.cookie('csrfToken');
+                let select_option_value = $("#select_pwd option:selected").val();
+                let ip                  = $("input[name='ip']").val()
+                let owner               = $("input[name='owner']").val();
+                let os_info             = $("textarea[name='os_info']").val();
+                let server_name         = $("input[name='server_name']").val();
+                let cpu                 = $("input[name='cpu']").val();
+                let memory              = $("input[name='memory']").val()+'M';
+                let disk                = $("input[name='disk']").val()+'G';
+                let network             = $("input[name='network']").val();
+                let location            = $("input[name='location']").val();
+                let tags                = $("input[name='tags']").val();
+                let remark              = $("textarea[name='remark']").val();
+                let input_pwd           = $("input[name='input_pwd']").val();
+                let encrypt_code        = $("input[name='encrypt_code']").val();
+                if(!server_name){
+                  server_name = ip;
+                }
+                var data = {
+                  "server_info":{
+                    'server_id':'',
+                    "ip"      : ip,
+                    "owner"   : owner,
+                    "os_info" : os_info,
+                    "name"    : server_name,
+                    "cpu"     : cpu,
+                    "memory"  : memory,
+                    "disk"    : disk,
+                    "network" : network,
+                    "location": location,
+                    "tags"    : tags,
+                    "remark"  : remark,
+                    'encrypt_info': {
+                      "select_pwd": select_option_value,
+                      "pwd"       : input_pwd
+                        }
+                  },
+                  "encrypt_code":encrypt_code,
+
+                }
+                
+                if(select_option_value == "login_cert"){//如果选择上传证书
+                  var cert_content = $("#cert_content").text();
+                  data.server_info.login['cert_content']=cert_content
+                }
+                console.log(data)
+                $.ajax({
+                  beforeSend:function(request){
+                  request.setRequestHeader('x-csrf-token', csrftoken)
+                  },
+                  url        : "api/set_server",
+                  type       : "POST",
+                  data       : data,
+                  success    : function(data){
+                    console.log(data)
+                  }
+                })
+              }else{
+                alert('填写有误')
+              }
+
+           });
+          
+     
+      </script>
+
+<%include ./share/x_panel_foot.html%>

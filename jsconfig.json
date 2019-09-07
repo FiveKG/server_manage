@@ -2,7 +2,7 @@
   "include": [
     "**/*"
   ],
-  "exclude": [
+  "exclude" : [
     "node_modules/",
     "app/public/",
     "app/view/",
@@ -14,4 +14,5 @@
   "compilerOptions":{
     "target": "es6"
   }
+
 }

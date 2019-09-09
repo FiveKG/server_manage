@@ -33,11 +33,18 @@
                 { "name": "location", "type": "text", "dblength": "100", "dftValue": "''", "summary": "所处机房", "remark": "", "isPrimary": false } ,
                 { "name": "tags", "type": "text", "dblength": "1000", "dftValue": "''", "summary": "标签", "remark": "", "isPrimary": false } ,
                 { "name": "remark", "type": "text", "dblength": "1000", "dftValue": "''", "summary": "备注", "remark": "", "isPrimary": false } ,
-                { "name": "encrypt_info", "type": "text", "dblength": "3000", "dftValue": "''", "summary": "加密的登陆信息", "remark": "{ 'ip': '' , 'port':22 , 'user': 'root' , 'pwd':'' , 'cert':'' , 'cert_pwd':'' }", "isPrimary": false } ,
                 { "name": "create_time", "type": "dateTime", "dblength": "0", "dftValue": "now()", "summary": "创建的时间", "remark": "", "isPrimary": false } ,
                 { "name": "create_account_id", "type": "text", "dblength": "50", "dftValue": "''", "summary": "创建者账户id", "remark": "", "isPrimary": false } ,
                 { "name": "state", "type": "text", "dblength": "20", "dftValue": "normal", "summary": "状态", "remark": "disable,normal", "isPrimary": false } ,
                 { "name": "odr_idx", "type": "int", "dblength": "0", "dftValue": "100", "summary": "排序值", "remark": "越大越前", "isPrimary": false } 
+            ]
+        },
+        {
+            "tableName": "server_login", "tableDesc": "服务器登陆信息", "group": "", 
+            "fields": [
+                { "name": "id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": true } ,
+                { "name": "server_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": false } ,
+                { "name": "account_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "", "isPrimary": false }
             ]
         },
         {
@@ -57,9 +64,12 @@
                 { "name": "id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": true } ,
                 { "name": "server_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "" , "isPrimary": false } ,
                 { "name": "account_id", "type": "text", "dblength": "32", "dftValue": "''", "summary": "", "remark": "", "isPrimary": false } ,
+                { "name": "login_name",      "type": "string",   "dblength": "50", "dftValue": "''",      "summary": "",        "remark": "", "isPrimary": false },
                 { "name": "auth_by", "type": "text", "dblength": "32", "dftValue": "''", "summary": "由谁授权。", "remark": "用户自己录入的服务器，此值为system", "isPrimary": false } ,
                 { "name": "auth_reason", "type": "text", "dblength": "500", "dftValue": "''", "summary": "授权原因", "remark": "", "isPrimary": false } ,
-                { "name": "create_time", "type": "dateTime", "dblength": "0", "dftValue": "now()", "summary": "授权的时间", "remark": "", "isPrimary": false } 
+                { "name": "create_time", "type": "dateTime", "dblength": "0", "dftValue": "now()", "summary": "授权的时间", "remark": "", "isPrimary": false }  ,
+                { "name": "encrypt_info", "type": "text", "dblength": "4094", "dftValue": "''", "summary": "加密的登陆信息", "remark": "{ 'ip': '' , 'port':22 , 'user': 'root' , 'pwd':'' , 'cert':'' , 'cert_pwd':'' }", "isPrimary": false } ,
+                { "name": "public_key_md5", "type": "text", "dblength": "64", "dftValue": "''", "summary": "公钥的md5值", "remark": "用于后续删除时对比公钥的内容，定位要删除的公钥", "isPrimary": false } 
             ]
         }
     ]

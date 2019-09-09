@@ -75,6 +75,8 @@ class BuildServerService extends Service {
             default:
                 break;
         }
+
+        ctx.status = 204;
     }
 }
 

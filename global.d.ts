@@ -250,3 +250,28 @@ interface DispatchJob {
     /** 任务的数据 */
     data : ImageBuildReq;
 }
+
+
+/** 服务器登陆信息 */
+interface ServerLoginInfo{
+    ip:string ;
+
+    port:number;
+
+    user:string ;
+
+    cert: string ;
+
+    cert_pwd: string;
+
+    pwd? : string ;
+}
+
+/** 新生成的登陆信息的返回对象结构 */
+interface NewLoginInfoResp{
+    /** 私钥的内容 */
+    privateKey : string ;
+
+    /** 公钥的 md5 */
+    publicKeyMd5 : string ;
+}

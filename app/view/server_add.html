@@ -69,7 +69,7 @@
                   <div class="input-group-addon">G</div>
                 </div>
               </div>
-              <select class="selectpicker col-md-3 col-sm-3 col-xs-12" >
+              <select class="selectpicker col-md-3 col-sm-3 col-xs-12" id = 'disk_style' >
                   <option value="hd">hd</option>
                   <option value="ssd">ssd</option>
               </select>
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <!--设置密码模态框-->>
+        <!--设置密码模态框-->
         <div class="modal fade" id="setPwd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -169,7 +169,6 @@
         
                   <!-- 模态框底部 -->
                   <div class="modal-footer">
-                    <input type="submit" class="btn btn-success" onclick="loading_data()"  value="确定">
                     <button type="button" class="btn btn-secondary" id = 'sure'>测试</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                   </div>
@@ -350,8 +349,9 @@
                 let os_info             = $("textarea[name='os_info']").val();
                 let server_name         = $("input[name='server_name']").val();
                 let cpu                 = $("input[name='cpu']").val();
-                let memory              = $("input[name='memory']").val()+'M';
-                let disk                = $("input[name='disk']").val()+'G';
+                let memory              = $("input[name='memory']").val();
+                let disk_style          = $("#disk_style option:selected").val();
+                let disk                = $("input[name='disk']").val()+'G'+'/'+disk_style;
                 let network             = $("input[name='network']").val();
                 let location            = $("input[name='location']").val();
                 let tags                = $("input[name='tags']").val();
@@ -386,9 +386,9 @@
                 
                 if(select_option_value == "login_cert"){//如果选择上传证书
                   var cert_content = $("#cert_content").text();
-                  data.server_info.login['cert_content']=cert_content
+                  data.server_info.encrypt_info['cert_content']=cert_content
                 }
-                console.log(data)
+                
                 $.ajax({
                   beforeSend:function(request){
                   request.setRequestHeader('x-csrf-token', csrftoken)

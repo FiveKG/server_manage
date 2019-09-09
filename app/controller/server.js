@@ -19,12 +19,14 @@ class ServerController extends Controller {
      */
     async server_info(){
 
+        let datas = await this.service.server.get_servers_info()
 
         let locals = {
             h3_title: '服务器信息',
             h2_title: '查看信息',
+            datas:datas,
         };
-    
+        
         await this.ctx.render('server_info.html',locals,viewOptions);
     };
 
@@ -49,7 +51,5 @@ class ServerController extends Controller {
     await this.ctx.render('server_auth.html',locals,viewOptions)
   }
 }
-
-
 
 module.exports = ServerController;

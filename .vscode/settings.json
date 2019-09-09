@@ -5,6 +5,13 @@
         "Vydl",
         "WWXJD",
         "csrf",
-        "postgres"
+        "csrftoken",
+        "datas",
+        "glyphicon",
+        "objs",
+        "postgres",
+        "repassword",
+        "selectpicker",
+        "tabindex"
     ]
 }

@@ -1,16 +1,16 @@
 <%include ./share/x_panel_head.html%> 
 <form class="form-horizontal form-label-left" id = "server_form" method="POST">
-        <!-- <div class="form-group">
+        <div class="form-group" >
           <label class="control-label col-md-3 col-sm-3 col-xs-12">服务器ID</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input type="text" class="form-control" readonly="readonly" placeholder="自动生成">
+            <input type="text" class="form-control" readonly="readonly" placeholder="自动生成" value ="<%=server_id%>" >
           </div>
-        </div> -->
+        </div>
 
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">拥有者 *</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input type="text" class="form-control" placeholder="谁出钱，谁就是拥有者" name = "owner">
+            <input type="text" class="form-control" placeholder="谁出钱，谁就是拥有者" name = "owner" value ="<%=owner%>">
           </div>
         </div>
 
@@ -18,36 +18,30 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12">操作系统信息 
           </label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <textarea class="form-control" rows="3" placeholder="操作系统信息"  name = "os_info"></textarea>
+            <textarea class="form-control" rows="3" placeholder="操作系统信息"  name = "os_info"><%=os_info%></textarea>
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">ip地址 *</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input type="text" class="form-control" placeholder="ip地址" name ="ip">
+            <input type="text" class="form-control" placeholder="ip地址" name ="ip" value ="<%=ip%>">
           </div>
         </div>
 
-        
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">端口 *</label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name = "port" placeholder="默认22" value = "22"  >
-            </div>
-        </div>
+
 
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">服务器名称</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input type="text" class="form-control" placeholder="默认ip地址" name="server_name" >
+            <input type="text" class="form-control" placeholder="默认ip地址" name="name" value ="<%=name%>" >
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">cpu核心数</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input type="text" class="form-control" placeholder="默认1" name = "cpu" value = "1">
+            <input type="text" class="form-control" placeholder="默认1" name = "cpu" value ="<%=cpu%>" >
           </div>
         </div>
 
@@ -55,7 +49,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12">内存大小</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
             <div class="input-group">
-              <input type="text" class="form-control" name = "memory" placeholder="默认512" value = "512">
+              <input type="text" class="form-control" name = "memory" placeholder="默认512" value ="<%=memory%>">
               <div class="input-group-addon">M</div>
             </div>
           </div>
@@ -65,13 +59,13 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12">硬盘</label>
               <div class= "col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="disk" placeholder="默认50G" value = "50">
+                    <input type="text" class="form-control" name="disk" placeholder="默认50G" value ="<%=disk%>">
                   <div class="input-group-addon">G</div>
                 </div>
               </div>
               <select class="selectpicker col-md-3 col-sm-3 col-xs-12" id = 'disk_style' >
-                  <option value="hd">hd</option>
-                  <option value="ssd">ssd</option>
+                  <option value="<%=current_disk_style%>"><%=current_disk_style%></option>
+                  <option value="<%=another_disk_style%>"><%=another_disk_style%></option>
               </select>
         </div>
 
@@ -79,21 +73,21 @@
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">带宽</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" class="form-control" name = "network" value = '' >
+              <input type="text" class="form-control" name = "network" value ="<%=network%>" >
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">所处机房</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" class="form-control" name="location" value = '' >
+              <input type="text" class="form-control" name="location" value ="<%=location%>">
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">标签</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input id="tags_1" type="text" class="tags form-control" value="无标签" name= "tags">
+              <input id="tags_1" type="text" class="tags form-control" value ="<%=tags%>" name= "tags">
               <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
             </div>
         </div>
@@ -102,7 +96,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12">备注</span>
             </label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <textarea class="form-control" rows="3" name="remark" value='' placeholder="备注信息"></textarea>
+              <textarea class="form-control" rows="3" name="remark" value ="<%=remark%>" placeholder="备注信息"></textarea>
             </div>
         </div>
         
@@ -232,24 +226,24 @@
                         }
                       }
                     },
-                    port: {
-                        message: '端口填写有误',
-                        validators: {
-                            notEmpty: {
-                                message: '端口不能为空'
-                            },
-                            between: {
-                                min: 1,
-                                max: 65535,
-                                message: '端口长度由1~65535'
-                            },
-                            threshold :  1 , //有1字符以上才发送ajax请求，
-                            regexp: {
-                                regexp: /^([1-9][0-9]*)$/,
-                                message: '端口由数字组成'
-                            }
-                        }
-                    },
+                    // port: {
+                    //     message: '端口填写有误',
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: '端口不能为空'
+                    //         },
+                    //         between: {
+                    //             min: 1,
+                    //             max: 65535,
+                    //             message: '端口长度由1~65535'
+                    //         },
+                    //         threshold :  1 , //有1字符以上才发送ajax请求，
+                    //         regexp: {
+                    //             regexp: /^([1-9][0-9]*)$/,
+                    //             message: '端口由数字组成'
+                    //         }
+                    //     }
+                    // },
                     memory:{
                       message: '内存填写有误',
                       validators: {
@@ -313,18 +307,7 @@
                 }
             });
               
-            /**
-             * 点击保存，上传数据
-             */
-            function loading_data(){
-              var formData = new FormData($("#server_form")[0]);
-              let data =  formData.entries()
-              console.log(JSON.stringify(data))
- 
-              for(let a of data){
-                console.log(a)
-              }
-            }
+
 
             $("input[name='upload_cert']").change(function () {
                   var fileList = this.files;
@@ -347,7 +330,7 @@
                 let ip                  = $("input[name='ip']").val()
                 let owner               = $("input[name='owner']").val();
                 let os_info             = $("textarea[name='os_info']").val();
-                let server_name         = $("input[name='server_name']").val();
+                let name                = $("input[name='name']").val();
                 let cpu                 = $("input[name='cpu']").val();
                 let memory              = $("input[name='memory']").val();
                 let disk_style          = $("#disk_style option:selected").val();
@@ -358,8 +341,8 @@
                 let remark              = $("textarea[name='remark']").val();
                 let input_pwd           = $("input[name='input_pwd']").val();
                 let encrypt_code        = $("input[name='encrypt_code']").val();
-                if(!server_name){
-                  server_name = ip;
+                if(!name){
+                  name = ip;
                 }
                 var data = {
                   "server_info":{
@@ -367,7 +350,7 @@
                     "ip"      : ip,
                     "owner"   : owner,
                     "os_info" : os_info,
-                    "name"    : server_name,
+                    "name"    : name,
                     "cpu"     : cpu,
                     "memory"  : memory,
                     "disk"    : disk,

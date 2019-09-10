@@ -21,8 +21,8 @@
     </thead>
 
     <tbody>
-        <% for(let i=0;i<datas.length;i++){%>
-            <tr>
+        <% for(var i=0;i<datas.length;i++){%>
+            <tr id='tr<%=i%>'>
                 <td><%=i%></td>
                 <td><%=datas[i].server_id%></td>
                 <td><%=datas[i].owner%></td>
@@ -43,9 +43,9 @@
                             Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle='modal' data-target='#check_pwd<%=i%>'>查看登录信息</a></li>
+                            <li><a href="#" data-toggle='modal'   data-target='#check_pwd<%=i%>'>查看登录信息</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/set_server">编辑/查看服务器</a></li>
+                            <li><a href="set_server?server_id=<%=datas[i].server_id%>" onclick="set_server('<%=i%>')">编辑/查看服务器</a></li>
                         </ul>
                     </div>       
                 </td>
@@ -56,7 +56,7 @@
                         <div class="modal-content">
                         <!-- 模态框头部 -->
                         <div class="modal-header">
-                            <h4 class="modal-title">查看登录信息<%=i%></h4>
+                            <h4 class="modal-title">查看登录信息</h4>
                         </div>
                         <!-- 模态框主体 -->
                         <div class="modal-body">
@@ -72,11 +72,10 @@
                                 <div class="form-group"  >
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" >显示登录信息</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                    <div class="well">
-                                                        ip: port: user: pwd
+                                                    <div class="well" id='well<%=i%>'>
+                                                        密码显示：
                                                     </div>
                                             </div>
-
                                     </div>
                                     <br>
                                     <br>                         
@@ -85,8 +84,7 @@
                         </div>
                         <!-- 模态框底部 -->
                         <div class="modal-footer">
-                            
-                            <button type="button" class="btn btn-secondary" id = 'sure<%=i%>'>确认</button>
+                            <button type="button" class="btn btn-secondary" onclick="input_pwd('<%=i%>')" id = 'sure<%=i%>'>确认</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                         </div>
                     </div>
@@ -99,5 +97,43 @@
 </table>
 <button type="button" class="btn btn-default" style="float: right"><a href="/set_server">添加服务器</a></button>
 
+<script>
+    var csrftoken = $.cookie('csrfToken');
+
+    /**
+     * 查看登录信息
+     # @method set_server
+     * @returns  void 
+     * @param {String} index 第几个行数据
+     * 
+     */
+    function input_pwd(index){
+        let server_id = $('#tr'+index).children('td').eq(1).text()
+        let unlock_pwd = $("input[name='input_pwd"+index+"'"+"]").val();
+        
+        let data = {
+            "unlock_pwd": unlock_pwd,
+            "server_id": server_id
+        }
+        $.ajax({
+                  beforeSend:function(request){
+                  request.setRequestHeader('x-csrf-token', csrftoken)
+                  },
+                  url    : "api/unlock",
+                  type   : "POST",
+                  data   : data,
+                  success: function(data){
+                    if(data.success==true){
+                        $("#well"+index).text('pwd:'+data.data.pwd)
+                    }
+                    else{
+                        alert(data.data.msg)
+                    }
+                  }
+              })
+    }
+
+
+</script>
 
 <%include ./share/x_panel_foot.html%>

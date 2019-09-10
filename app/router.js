@@ -25,6 +25,7 @@ module.exports = app => {
   router.get('/server',controller.server.server_info);
   router.get('/set_server',controller.server.set_server);
 
+  router.post('/api/unlock',controller.api.serverApi.unlock);
   router.post('/api/set_server',controller.api.serverApi.set_server);
 
 };

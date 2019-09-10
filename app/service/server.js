@@ -9,9 +9,9 @@ class ServerService extends Service {
    * @returns {Array} data 所有服务器信息
    */
   async get_servers_info(){
-    this.logger.debug(`edit_server`);
+    this.logger.debug(`获取所有服务器信息`);
     let data=[]
-    const res_objs = await this.ctx.model.Server.findAll({
+    let res_objs = await this.ctx.model.Server.findAll({
       attributes:['server_id','owner','os_info','ip','name','cpu','memory','disk','network','location','tags','remark'],
     })
     
@@ -19,6 +19,22 @@ class ServerService extends Service {
       data.push(obj.dataValues)
     }
     return data
+  }
+
+  /**
+   * 获取一个指定服务器信息 
+   * @param {String} server_id 服务器id
+   * @method get_server_by_id
+   * @returns {Json} data 所有服务器信息
+   */
+  async get_server_by_id(server_id){
+    this.logger.debug('获取一个指定服务器信息 ');
+
+    let res_obj = await this.ctx.model.Server.findOne({
+      where:{'server_id':server_id},
+      attributes:['server_id','owner','os_info','ip','name','cpu','memory','disk','network','location','tags','remark'],
+    })
+    return res_obj.dataValues
   }
 
 }
